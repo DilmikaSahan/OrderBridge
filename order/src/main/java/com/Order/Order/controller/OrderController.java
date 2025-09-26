@@ -1,5 +1,6 @@
 package com.Order.Order.controller;
 
+import com.Order.Order.common.OrderResponse;
 import com.Order.Order.dto.OrderDto;
 import com.Order.Order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class OrderController {
         return orderService.getOrderByID(orderId);
     }
     @PostMapping("/addorder")
-    public OrderDto saveOrder(@RequestBody OrderDto orderDto){
+    public OrderResponse saveOrder(@RequestBody OrderDto orderDto){
         return orderService.saveOrder(orderDto);
     }
     @PutMapping("/updateorder")
