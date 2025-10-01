@@ -25,12 +25,8 @@ public class OrderService {
     private final WebClient inventoryWebClient;
     private final WebClient productWebClient;
 
-
-    @Autowired
-    private OrderRepo orderRepo;
-
-    @Autowired
-    private ModelMapper modelMapper;
+    private final OrderRepo orderRepo;
+    private final ModelMapper modelMapper;
 
     public OrderService(WebClient inventoryWebClient,WebClient productWebClient,OrderRepo orderRepo,ModelMapper modelMapper) {
         this.inventoryWebClient=inventoryWebClient;
@@ -53,7 +49,7 @@ public class OrderService {
                     .retrieve()
                     .bodyToMono(InventoryDto.class)
                     .block();
-            
+
             assert inventoryResponse != null;
             Integer productId = inventoryResponse.getProductId();
 
@@ -68,7 +64,7 @@ public class OrderService {
                 if (productResponse.getForSale()==1){
                     orderRepo.save(modelMapper.map(orderDto, Orders.class));
                 }else {
-                    return new ErrorOrderResponse("Product not fot sale");
+                    return new ErrorOrderResponse("Product not for sale");
                 }
                 orderRepo.save(modelMapper.map(orderDto, Orders.class));
                 return new SuccessOrderResponse(orderDto);
