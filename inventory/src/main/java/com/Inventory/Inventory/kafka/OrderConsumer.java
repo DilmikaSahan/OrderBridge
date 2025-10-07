@@ -1,5 +1,6 @@
 package com.Inventory.Inventory.kafka;
 
+
 import com.example.base.dto.OrderEventDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
